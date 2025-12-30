@@ -14,7 +14,6 @@ test.describe('Blog CRUD Operations', () => {
     user2Password = 'password123';
 
     // Register and login as user1
-    const baseURL = process.env.FRONTEND_URL || 'http://localhost:5173';
     await page.goto(`${baseURL}/auth`, { waitUntil: 'domcontentloaded', timeout: 30000 });
     await page.getByRole('button', { name: 'Start a 14 day free trial' }).click();
     await page.getByPlaceholder('Enter your username').fill(`user1${timestamp}`);
