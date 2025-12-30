@@ -34,17 +34,17 @@
 
         <div
           v-if="authStore.user && blogStore.currentBlog.authorId === authStore.user.id"
-          class="flex gap-4 pt-6 border-t border-gray-200 dark:border-white/10"
+          class="flex gap-6 pt-6 border-t border-gray-200 dark:border-white/10"
         >
           <button
             @click="$router.push(`/blog/${blogStore.currentBlog.id}/edit`)"
-            class="px-6 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-500 transition-all text-sm/6 font-semibold shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:shadow-none dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500"
+            class="flex justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:shadow-none dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500 transition-colors"
           >
             Edit
           </button>
           <button
             @click="handleDelete"
-            class="px-6 py-2 bg-red-600 text-white rounded-md hover:bg-red-500 transition-all text-sm/6 font-semibold shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 dark:bg-red-500 dark:shadow-none dark:hover:bg-red-400 dark:focus-visible:outline-red-500"
+            class="flex justify-center rounded-md bg-red-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-red-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 dark:bg-red-500 dark:shadow-none dark:hover:bg-red-400 dark:focus-visible:outline-red-500 transition-colors"
           >
             Delete
           </button>

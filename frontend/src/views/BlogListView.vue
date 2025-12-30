@@ -3,19 +3,19 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center mb-8 animate-fade-in">
         <h1 class="text-4xl font-bold text-gray-900 dark:text-white">Blog Posts</h1>
-        <div class="flex gap-4 items-center">
+        <div class="flex gap-6 items-center">
           <span v-if="authStore.user" class="text-gray-700 dark:text-gray-300">
             Welcome, {{ authStore.user.username }}!
           </span>
           <button
             @click="handleLogout"
-            class="px-4 py-2 bg-gray-200 text-gray-900 rounded-md hover:bg-gray-300 transition-colors text-sm/6 font-semibold dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600"
+            class="flex justify-center rounded-md bg-gray-200 px-4 py-2 text-sm/6 font-semibold text-gray-900 shadow-xs hover:bg-gray-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-500 dark:bg-gray-700 dark:text-white dark:shadow-none dark:hover:bg-gray-600 dark:focus-visible:outline-gray-500 transition-colors"
           >
             Logout
           </button>
           <button
             @click="$router.push('/blog/create')"
-            class="px-6 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-500 transition-all text-sm/6 font-semibold shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:shadow-none dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500"
+            class="flex justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:shadow-none dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500 transition-colors"
           >
             + New Post
           </button>
@@ -54,7 +54,7 @@
             </div>
             <button
               @click="$router.push(`/blog/${blog.id}`)"
-              class="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-500 transition-colors text-sm/6 font-semibold shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:shadow-none dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500"
+              class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:shadow-none dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500 transition-colors"
             >
               Read More
             </button>
