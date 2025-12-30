@@ -1,5 +1,3 @@
-/* eslint-disable import/order */
-import 'reflect-metadata';
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
 
