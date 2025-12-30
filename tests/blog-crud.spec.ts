@@ -15,11 +15,11 @@ test.describe('Blog CRUD Operations', () => {
 
     // Register and login as user1
     await page.goto('/auth');
-    await page.getByText("Don't have an account? Sign up").click();
+    await page.getByRole('button', { name: 'Start a 14 day free trial' }).click();
     await page.getByPlaceholder('Enter your username').fill(`user1${timestamp}`);
     await page.getByPlaceholder('Enter your email').fill(user1Email);
     await page.getByPlaceholder('Enter your password').fill(user1Password);
-    await page.getByRole('button', { name: 'Sign Up' }).click();
+    await page.getByRole('button', { name: 'Sign up' }).click();
     await expect(page).toHaveURL('/blog');
   });
 
@@ -72,7 +72,6 @@ test.describe('Blog CRUD Operations', () => {
     await expect(page).toHaveURL('/blog');
 
     // Click on blog to view detail
-    await page.getByText(blogTitle).click();
     await page.getByRole('button', { name: 'Read More' }).first().click();
 
     // Should see full content
@@ -94,7 +93,6 @@ test.describe('Blog CRUD Operations', () => {
     await expect(page).toHaveURL('/blog');
 
     // View blog detail
-    await page.getByText(blogTitle).click();
     await page.getByRole('button', { name: 'Read More' }).first().click();
 
     // Click edit
@@ -126,7 +124,6 @@ test.describe('Blog CRUD Operations', () => {
     await expect(page).toHaveURL('/blog');
 
     // View blog detail
-    await page.getByText(blogTitle).click();
     await page.getByRole('button', { name: 'Read More' }).first().click();
 
     // Delete blog
@@ -151,8 +148,7 @@ test.describe('Blog CRUD Operations', () => {
     await page.getByRole('button', { name: 'Create' }).click();
     await expect(page).toHaveURL('/blog');
 
-    // Get blog ID from URL or text
-    await page.getByText(blogTitle).click();
+    // Get blog ID from URL
     await page.getByRole('button', { name: 'Read More' }).first().click();
     const currentUrl = page.url();
     const blogId = currentUrl.split('/').pop();
@@ -163,11 +159,11 @@ test.describe('Blog CRUD Operations', () => {
 
     // Register and login as user2
     const timestamp = Date.now();
-    await page.getByText("Don't have an account? Sign up").click();
+    await page.getByRole('button', { name: 'Start a 14 day free trial' }).click();
     await page.getByPlaceholder('Enter your username').fill(`user2${timestamp}`);
     await page.getByPlaceholder('Enter your email').fill(user2Email);
     await page.getByPlaceholder('Enter your password').fill(user2Password);
-    await page.getByRole('button', { name: 'Sign Up' }).click();
+    await page.getByRole('button', { name: 'Sign up' }).click();
     await expect(page).toHaveURL('/blog');
 
     // Try to access edit page directly
@@ -198,11 +194,11 @@ test.describe('Blog CRUD Operations', () => {
 
     // Register and login as user2
     const timestamp = Date.now();
-    await page.getByText("Don't have an account? Sign up").click();
+    await page.getByRole('button', { name: 'Start a 14 day free trial' }).click();
     await page.getByPlaceholder('Enter your username').fill(`user2${timestamp}`);
     await page.getByPlaceholder('Enter your email').fill(user2Email);
     await page.getByPlaceholder('Enter your password').fill(user2Password);
-    await page.getByRole('button', { name: 'Sign Up' }).click();
+    await page.getByRole('button', { name: 'Sign up' }).click();
     await expect(page).toHaveURL('/blog');
 
     // Should see user1's blog in the list

@@ -24,14 +24,18 @@ export default defineConfig({
     {
       command: 'cd backend && npm run start:dev',
       url: 'http://localhost:3000',
-      reuseExistingServer: !process.env.CI,
+      reuseExistingServer: true,
       timeout: 120000,
+      stdout: 'ignore',
+      stderr: 'pipe',
     },
     {
       command: 'cd frontend && npm run dev',
       url: 'http://localhost:5173',
-      reuseExistingServer: !process.env.CI,
+      reuseExistingServer: true,
       timeout: 120000,
+      stdout: 'ignore',
+      stderr: 'pipe',
     },
   ],
 });

@@ -1,39 +1,41 @@
 <template>
-  <div class="min-h-screen bg-gray-50 py-8">
+  <div class="min-h-screen bg-gray-900 py-8">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="bg-white rounded-lg shadow-lg p-8 animate-slide-in">
-        <h1 class="text-3xl font-bold text-gray-900 mb-6">
+      <div class="bg-white/5 rounded-md border border-white/10 p-8 animate-slide-in">
+        <h1 class="text-3xl font-bold text-white mb-6">
           {{ isEdit ? 'Edit Blog Post' : 'Create New Blog Post' }}
         </h1>
 
         <form @submit.prevent="handleSubmit" class="space-y-6">
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">
+            <label for="title" class="block text-sm/6 font-medium text-gray-100 mb-2">
               Title
             </label>
             <input
+              id="title"
               v-model="form.title"
               type="text"
               required
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+              class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
               placeholder="Enter blog title"
             />
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">
+            <label for="content" class="block text-sm/6 font-medium text-gray-100 mb-2">
               Content
             </label>
             <textarea
+              id="content"
               v-model="form.content"
               required
               rows="15"
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all resize-none"
+              class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6 resize-none"
               placeholder="Write your blog content here..."
             ></textarea>
           </div>
 
-          <div v-if="error" class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+          <div v-if="error" class="bg-red-500/10 border border-red-500/20 text-red-400 px-4 py-3 rounded-md text-sm">
             {{ error }}
           </div>
 
@@ -41,14 +43,14 @@
             <button
               type="submit"
               :disabled="loading"
-              class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all transform hover:scale-105"
+              class="flex justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {{ loading ? 'Saving...' : isEdit ? 'Update' : 'Create' }}
             </button>
             <button
               type="button"
               @click="$router.push('/blog')"
-              class="px-6 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition-colors"
+              class="flex justify-center rounded-md bg-gray-700 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-gray-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-500"
             >
               Cancel
             </button>

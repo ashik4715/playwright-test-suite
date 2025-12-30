@@ -1,81 +1,113 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
-    <div class="w-full max-w-md animate-fade-in">
-      <div class="bg-white rounded-2xl shadow-xl p-8">
-        <h1 class="text-3xl font-bold text-center mb-8 text-gray-800">
-          {{ isLogin ? 'Welcome Back' : 'Create Account' }}
-        </h1>
+  <div
+    class="min-h-screen bg-gray-900 flex flex-col justify-center px-6 py-12 lg:px-8"
+  >
+    <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+      <h2
+        class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-white"
+      >
+        {{ isLogin ? "Sign in to your account" : "Create your account" }}
+      </h2>
+    </div>
 
-        <form @submit.prevent="handleSubmit" class="space-y-6">
-          <div v-if="!isLogin" class="animate-slide-in">
-            <label class="block text-sm font-medium text-gray-700 mb-2">
-              Username
-            </label>
+    <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+      <form @submit.prevent="handleSubmit" class="space-y-6">
+        <div v-if="!isLogin">
+          <label
+            for="username"
+            class="block text-sm/6 font-medium text-gray-100"
+            >Username</label
+          >
+          <div class="mt-2">
             <input
+              id="username"
               v-model="form.username"
               type="text"
+              name="username"
               required
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+              autocomplete="username"
+              class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
               placeholder="Enter your username"
             />
           </div>
+        </div>
 
-          <div class="animate-slide-in">
-            <label class="block text-sm font-medium text-gray-700 mb-2">
-              Email
-            </label>
+        <div>
+          <label for="email" class="block text-sm/6 font-medium text-gray-100"
+            >Email address</label
+          >
+          <div class="mt-2">
             <input
+              id="email"
               v-model="form.email"
               type="email"
+              name="email"
               required
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+              autocomplete="email"
+              class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
               placeholder="Enter your email"
             />
           </div>
+        </div>
 
-          <div class="animate-slide-in">
-            <label class="block text-sm font-medium text-gray-700 mb-2">
-              Password
-            </label>
+        <div>
+          <div class="flex items-center justify-between">
+            <label
+              for="password"
+              class="block text-sm/6 font-medium text-gray-100"
+              >Password</label
+            >
+          </div>
+          <div class="mt-2">
             <input
+              id="password"
               v-model="form.password"
               type="password"
+              name="password"
               required
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+              :autocomplete="isLogin ? 'current-password' : 'new-password'"
+              class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
               placeholder="Enter your password"
             />
           </div>
+        </div>
 
-          <div v-if="error" class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
-            {{ error }}
-          </div>
+        <div
+          v-if="error"
+          class="bg-red-500/10 border border-red-500/20 text-red-400 px-4 py-3 rounded-md text-sm"
+        >
+          {{ error }}
+        </div>
 
+        <div>
           <button
             type="submit"
             :disabled="loading"
-            class="w-full bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all transform hover:scale-105"
+            class="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {{ loading ? 'Processing...' : isLogin ? 'Sign In' : 'Sign Up' }}
-          </button>
-        </form>
-
-        <div class="mt-6 text-center">
-          <button
-            @click="toggleMode"
-            class="text-indigo-600 hover:text-indigo-800 font-medium transition-colors"
-          >
-            {{ isLogin ? "Don't have an account? Sign up" : 'Already have an account? Sign in' }}
+            {{ loading ? "Processing..." : isLogin ? "Sign in" : "Sign up" }}
           </button>
         </div>
-      </div>
+      </form>
+
+      <p class="mt-10 text-center text-sm/6 text-gray-400">
+        {{ isLogin ? "Not a member?" : "Already have an account?" }}
+        <button
+          @click="toggleMode"
+          type="button"
+          class="font-semibold text-indigo-400 hover:text-indigo-300"
+        >
+          {{ isLogin ? "Start a 14 day free trial" : "Sign in" }}
+        </button>
+      </p>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue';
-import { useRouter } from 'vue-router';
-import { useAuthStore } from '../stores/auth';
+import { reactive, ref } from "vue";
+import { useRouter } from "vue-router";
+import { useAuthStore } from "../stores/auth";
 
 const router = useRouter();
 const authStore = useAuthStore();
@@ -85,17 +117,17 @@ const loading = ref(false);
 const error = ref<string | null>(null);
 
 const form = reactive({
-  username: '',
-  email: '',
-  password: '',
+  username: "",
+  email: "",
+  password: "",
 });
 
 function toggleMode() {
   isLogin.value = !isLogin.value;
   error.value = null;
-  form.username = '';
-  form.email = '';
-  form.password = '';
+  form.username = "";
+  form.email = "";
+  form.password = "";
 }
 
 async function handleSubmit() {
@@ -115,12 +147,11 @@ async function handleSubmit() {
         password: form.password,
       });
     }
-    router.push('/blog');
+    router.push("/blog");
   } catch (err) {
-    error.value = err instanceof Error ? err.message : 'An error occurred';
+    error.value = err instanceof Error ? err.message : "An error occurred";
   } finally {
     loading.value = false;
   }
 }
 </script>
-
