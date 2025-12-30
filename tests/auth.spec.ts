@@ -2,7 +2,13 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Authentication', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/auth');
+    try {
+      await page.goto('/auth', { waitUntil: 'networkidle' });
+      await page.waitForLoadState('domcontentloaded');
+    } catch (error) {
+      console.error('Error navigating to auth page:', error);
+      throw error;
+    }
   });
 
   test('should display login form by default', async ({ page }) => {
@@ -36,9 +42,11 @@ test.describe('Authentication', () => {
     // Submit form
     await page.getByRole('button', { name: 'Sign up' }).click();
 
-    // Should redirect to blog list
+    // Wait for navigation and content
+    await page.waitForURL('**/blog', { timeout: 10000 });
     await expect(page).toHaveURL('/blog');
-    await expect(page.getByText(`Welcome, ${username}!`)).toBeVisible();
+    await page.waitForLoadState('networkidle');
+    await expect(page.getByText(`Welcome, ${username}!`)).toBeVisible({ timeout: 5000 });
   });
 
   test('should login with existing user', async ({ page }) => {
@@ -64,9 +72,11 @@ test.describe('Authentication', () => {
     await page.getByPlaceholder('Enter your password').fill(password);
     await page.getByRole('button', { name: 'Sign in' }).click();
 
-    // Should redirect to blog list
+    // Wait for navigation and content
+    await page.waitForURL('**/blog', { timeout: 10000 });
     await expect(page).toHaveURL('/blog');
-    await expect(page.getByText(`Welcome, ${username}!`)).toBeVisible();
+    await page.waitForLoadState('networkidle');
+    await expect(page.getByText(`Welcome, ${username}!`)).toBeVisible({ timeout: 5000 });
   });
 
   test('should show error on invalid login', async ({ page }) => {

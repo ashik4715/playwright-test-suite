@@ -28,14 +28,17 @@ export default defineConfig({
       timeout: 120000,
       stdout: 'pipe',
       stderr: 'pipe',
+      env: {
+        NODE_ENV: 'development',
+      },
     },
     {
       command: 'cd frontend && npm run dev',
       url: 'http://localhost:5173',
       reuseExistingServer: !process.env.CI,
       timeout: 120000,
-      stdout: 'pipe',
-      stderr: 'pipe',
+      stdout: 'ignore',
+      stderr: 'ignore',
     },
   ],
 });

@@ -14,13 +14,16 @@ test.describe('Blog CRUD Operations', () => {
     user2Password = 'password123';
 
     // Register and login as user1
-    await page.goto('/auth');
+    await page.goto('/auth', { waitUntil: 'networkidle' });
+    await page.waitForLoadState('domcontentloaded');
     await page.getByRole('button', { name: 'Start a 14 day free trial' }).click();
     await page.getByPlaceholder('Enter your username').fill(`user1${timestamp}`);
     await page.getByPlaceholder('Enter your email').fill(user1Email);
     await page.getByPlaceholder('Enter your password').fill(user1Password);
     await page.getByRole('button', { name: 'Sign up' }).click();
+    await page.waitForURL('**/blog', { timeout: 10000 });
     await expect(page).toHaveURL('/blog');
+    await page.waitForLoadState('networkidle');
   });
 
   test('should create a new blog post', async ({ page }) => {
