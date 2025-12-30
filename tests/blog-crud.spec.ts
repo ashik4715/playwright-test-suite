@@ -5,6 +5,7 @@ test.describe('Blog CRUD Operations', () => {
   let user1Password: string;
   let user2Email: string;
   let user2Password: string;
+  const baseURL = process.env.FRONTEND_URL || 'http://localhost:5173';
 
   test.beforeEach(async ({ page }) => {
     const timestamp = Date.now();
