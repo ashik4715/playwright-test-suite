@@ -2,6 +2,7 @@ import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   testDir: './tests',
+  testMatch: /.*\.spec\.ts$/,
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
@@ -12,6 +13,8 @@ export default defineConfig({
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
   },
+  // Don't start servers when just listing tests
+  webServer: process.env.PW_TEST_LIST ? undefined : [
 
   projects: [
     {
@@ -22,12 +25,15 @@ export default defineConfig({
 
   webServer: [
     {
-      command: 'cd backend && cross-env NODE_OPTIONS="--require reflect-metadata" npm run start:dev',
+      command: 'cd backend && npm run start:dev',
       url: 'http://localhost:3000',
       reuseExistingServer: !process.env.CI,
       timeout: 120000,
       stdout: 'pipe',
       stderr: 'pipe',
+      env: {
+        NODE_OPTIONS: '--require reflect-metadata',
+      },
     },
     {
       command: 'cd frontend && npm run dev',

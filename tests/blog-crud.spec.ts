@@ -175,7 +175,7 @@ test.describe('Blog CRUD Operations', () => {
     // Should redirect to blog list or show error (user2 cannot edit user1's blog)
     // The backend should prevent this, but if frontend allows, we check that edit button is not visible
     await page.goto(`/blog/${blogId}`);
-    
+
     // Edit and Delete buttons should not be visible for other user's blog
     await expect(page.getByRole('button', { name: 'Edit' })).not.toBeVisible();
     await expect(page.getByRole('button', { name: 'Delete' })).not.toBeVisible();
