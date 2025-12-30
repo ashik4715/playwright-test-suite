@@ -30,6 +30,9 @@ export default tseslint.config(
       '@typescript-eslint/no-floating-promises': 'warn',
       '@typescript-eslint/no-unsafe-argument': 'warn',
       "prettier/prettier": ["error", { endOfLine: "auto" }],
+      // Disable import sorting to allow reflect-metadata to be first
+      'import/order': 'off',
+      'sort-imports': 'off',
     },
   },
 );
