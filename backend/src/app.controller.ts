@@ -1,6 +1,6 @@
 /* eslint-disable import/order */
-import { Controller, Get } from '@nestjs/common';
 import 'reflect-metadata';
+import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
