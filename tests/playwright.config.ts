@@ -8,7 +8,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: 'html',
   use: {
-    baseURL: 'http://localhost:5173',
+    baseURL: process.env.FRONTEND_URL || 'http://localhost:5173',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
   },
@@ -22,23 +22,20 @@ export default defineConfig({
 
   webServer: [
     {
-      command: 'cd backend && npm run start:dev',
+      command: 'cd backend && cross-env NODE_OPTIONS="--require reflect-metadata" npm run start:dev',
       url: 'http://localhost:3000',
       reuseExistingServer: !process.env.CI,
       timeout: 120000,
       stdout: 'pipe',
       stderr: 'pipe',
-      env: {
-        NODE_ENV: 'development',
-      },
     },
     {
       command: 'cd frontend && npm run dev',
       url: 'http://localhost:5173',
       reuseExistingServer: !process.env.CI,
       timeout: 120000,
-      stdout: 'ignore',
-      stderr: 'ignore',
+      stdout: 'pipe',
+      stderr: 'pipe',
     },
   ],
 });

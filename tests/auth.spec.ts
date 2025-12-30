@@ -2,13 +2,8 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Authentication', () => {
   test.beforeEach(async ({ page }) => {
-    try {
-      await page.goto('/auth', { waitUntil: 'networkidle' });
-      await page.waitForLoadState('domcontentloaded');
-    } catch (error) {
-      console.error('Error navigating to auth page:', error);
-      throw error;
-    }
+    await page.goto('/auth');
+    await page.waitForLoadState('domcontentloaded');
   });
 
   test('should display login form by default', async ({ page }) => {

@@ -14,7 +14,7 @@ test.describe('Blog CRUD Operations', () => {
     user2Password = 'password123';
 
     // Register and login as user1
-    await page.goto('/auth', { waitUntil: 'networkidle' });
+    await page.goto('/auth');
     await page.waitForLoadState('domcontentloaded');
     await page.getByRole('button', { name: 'Start a 14 day free trial' }).click();
     await page.getByPlaceholder('Enter your username').fill(`user1${timestamp}`);
