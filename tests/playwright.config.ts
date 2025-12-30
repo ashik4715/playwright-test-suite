@@ -13,9 +13,6 @@ export default defineConfig({
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
   },
-  // Don't start servers when just listing tests
-  webServer: process.env.PW_TEST_LIST ? undefined : [
-
   projects: [
     {
       name: 'chromium',
