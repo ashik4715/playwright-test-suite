@@ -12,6 +12,8 @@ export default defineConfig({
     baseURL: process.env.FRONTEND_URL || 'http://localhost:5173',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
+    navigationTimeout: 30000,
+    actionTimeout: 10000,
   },
   projects: [
     {
@@ -39,6 +41,7 @@ export default defineConfig({
       timeout: 120000,
       stdout: 'pipe',
       stderr: 'pipe',
+      ignoreHTTPSErrors: true,
     },
   ],
 });

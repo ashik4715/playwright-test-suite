@@ -14,8 +14,8 @@ test.describe('Blog CRUD Operations', () => {
     user2Password = 'password123';
 
     // Register and login as user1
-    await page.goto('/auth');
-    await page.waitForLoadState('domcontentloaded');
+    const baseURL = process.env.FRONTEND_URL || 'http://localhost:5173';
+    await page.goto(`${baseURL}/auth`, { waitUntil: 'domcontentloaded', timeout: 30000 });
     await page.getByRole('button', { name: 'Start a 14 day free trial' }).click();
     await page.getByPlaceholder('Enter your username').fill(`user1${timestamp}`);
     await page.getByPlaceholder('Enter your email').fill(user1Email);
@@ -170,11 +170,11 @@ test.describe('Blog CRUD Operations', () => {
     await expect(page).toHaveURL('/blog');
 
     // Try to access edit page directly
-    await page.goto(`/blog/${blogId}/edit`);
+    await page.goto(`${baseURL}/blog/${blogId}/edit`, { waitUntil: 'domcontentloaded', timeout: 30000 });
 
     // Should redirect to blog list or show error (user2 cannot edit user1's blog)
     // The backend should prevent this, but if frontend allows, we check that edit button is not visible
-    await page.goto(`/blog/${blogId}`);
+    await page.goto(`${baseURL}/blog/${blogId}`, { waitUntil: 'domcontentloaded', timeout: 30000 });
 
     // Edit and Delete buttons should not be visible for other user's blog
     await expect(page.getByRole('button', { name: 'Edit' })).not.toBeVisible();

@@ -2,8 +2,8 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Authentication', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/auth');
-    await page.waitForLoadState('domcontentloaded');
+    const baseURL = process.env.FRONTEND_URL || 'http://localhost:5173';
+    await page.goto(`${baseURL}/auth`, { waitUntil: 'domcontentloaded', timeout: 30000 });
   });
 
   test('should display login form by default', async ({ page }) => {
